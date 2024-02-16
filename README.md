@@ -1,6 +1,7 @@
 # Full Stack Application
 Team members: *Imogen Behan-Willett, Valentinas Kornijenka and Isaac Eveans Mellonie*
 # R1
+---
 ### Description of website
 #### Purpose
 The purpose of the app is to provide a bespoke e-commerce environment for a local Brisbane artist.
@@ -42,8 +43,10 @@ Our fictional artist is named Nicole Nightmare. She produces art prints and sele
 **Node.js:** We will use Node.js as it lets developers use JavaScript to write command-line tools and for server-side scripting to produce dynamic web page content before the page is sent to the user's web browser. This unifies web application development around a single programming language.
 
 # R2
+---
 ### Dataflow Diagram
 # R3
+---
 ### Application Architecture
 ![Application Architecture](./docs/application%20architecture.jpg)
 # R4
@@ -69,8 +72,10 @@ Our fictional artist is named Nicole Nightmare. She produces art prints and sele
 |   |Consistent State|As a customer I want to have my items in cart remain consistent across all areas of the app so that I don’t forget the items I’d like to purchase.|Given that a user has a unique cart of items, when a user makes changes to the app through navigation and state changes, then the items they want to have saved will remain in the cart.|**MEDIUM** |
 
 # R5
+---
 ### Wireframes
 # R6
+---
 ### Screenshots of your Trello board throughout the duration of the project
 
 Screenshots from the 9/02/24
