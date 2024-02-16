@@ -45,6 +45,14 @@ Our fictional artist is named Nicole Nightmare. She produces art prints and sele
 # R2
 ---
 ### Dataflow Diagram
+##### Level 0
+![Dataflow Diagram Level 0](./docs/dataflow_lv0.png)
+##### Level 1
+![Dataflow Diagram Level 1](./docs/dataflow_lv1.png)
+![Dataflow Diagram Level 1 Legend](./docs/dataflow_lv1_legend.png)
+##### Level 2
+![Dataflow Diagram Level 2: Managing Stock Process](./docs/dataflow_lv2_process.png)
+![Dataflow Diagram Level 2: Adding and Editing Products](./docs/dataflow_lv2_products.png)
 # R3
 ---
 ### Application Architecture
