@@ -84,3 +84,9 @@ Screenshots as of the 14/02/24
 
 ![Trello board as of the 14/02/24](./docs/14.2_pt_1.png)
 ![Trello board as of the 14/02/24](./docs/14.2_pt_2.png)
+---
+
+Screenshots as of the 16/02/24
+
+![Trello board as of the 14/02/24](./docs/16.2_pt1.png)
+![Trello board as of the 14/02/24](./docs/16.2_pt2.png)
