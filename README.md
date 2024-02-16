@@ -48,7 +48,7 @@ Our fictional artist is named Nicole Nightmare. She produces art prints and sele
 # R3
 ---
 ### Application Architecture
-![Application Architecture](./docs/application%20architecture.jpg)
+![Application Architecture](./docs/architecture.png)
 # R4
 ### User Stories
 #### Epic: Seller UX
