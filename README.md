@@ -59,6 +59,27 @@ Our fictional artist is named Nicole Nightmare. She produces art prints and sele
 ![Application Architecture](./docs/architecture.png)
 # R4
 ### User Stories
+#### First Iteration 
+*Seller UX*
+
+1. As a shop owner I’d like a page that lists my available products.
+2. I’d like my listed products to have a set price that I can change.
+3. I’d like to add features to help my product sell better, like adding a image or putting them on sale.
+4. I’d like to be able to access the procedures of my sale.
+5. I’d like to see my profits over time in a graph. 
+
+
+
+*Customer UX*
+1.  As a general user I want to browse a website so that I can find products to purchase. 
+2.  As a customer I want a persistent cart that will save across different browsing sessions.
+3.  As a customer I want to see a trending tab and see what other people buy.
+4.  As a customer I want to checkout securely and safely.
+
+#### Futher Iteration
+We refined our user stories by investigating why the user would like a given particular feature, what would need to be present to facilitate that feature and what would need to be done to implement the story. Some stories were discarded for being out of scope, such as the seller being able to see their profits over time. 
+After this iteration we went through the user stories and assigned a level of priority to each. 
+
 #### Epic: Seller UX
 |   |Feature   |Story   |Acceptance Criteria   |Priority   |
 |---|---|---|---|---|
