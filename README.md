@@ -80,8 +80,45 @@ Our fictional artist is named Nicole Nightmare. She produces art prints and sele
 |   |Consistent State|As a customer I want to have my items in cart remain consistent across all areas of the app so that I don’t forget the items I’d like to purchase.|Given that a user has a unique cart of items, when a user makes changes to the app through navigation and state changes, then the items they want to have saved will remain in the cart.|**MEDIUM** |
 
 # R5
----
+
 ### Wireframes
+We designed our wireframes using Figma. We kept the wireframes in monotone so that we had the option of easily making design changes later if needed. One of the key aspects of the site is that it is customised to suit the artist’s needs.
+
+Siteflow shows the relationships between the pages. The Home page acts as a base between all other pages, linking them from the hamburger menu (mobile/tablet) and menu (desktop). The main logo at the head of the page will also take the user to Home on click. 
+
+#### Siteflow
+![Siteflow](./docs/wireframes/siteflow.png)
+
+#### Home
+![Home](./docs/wireframes/wireframes-home.png)
+
+#### Artist Portal
+![Artist Portal](./docs/wireframes/wireframes-artist-portal.png)
+
+#### About
+![About](./docs/wireframes/wireframes-about.png)
+
+#### Shop
+![Shop](./docs/wireframes/wireframes-shop.png)
+
+#### Sign In
+![Sign In](./docs/wireframes/wireframes-sign-in.png)
+
+### Create Account
+![Create Account](./docs/wireframes/wireframes-create-account.png)
+
+#### Cart
+![Cart](./docs/wireframes/wireframes-cart.png)
+
+#### Checkout
+![Checkout](./docs/wireframes/wireframes-checkout.png)
+
+#### Item
+![Item](./docs/wireframes/wireframes-item.png)
+
+#### Purchase
+![Purchase](./docs/wireframes/wireframes-purchase.png)
+
 # R6
 ---
 ### Screenshots of your Trello board throughout the duration of the project
