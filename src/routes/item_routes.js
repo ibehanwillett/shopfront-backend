@@ -5,10 +5,10 @@ import { Router } from "express"
 const router = Router()
 
 
-router.get('/', async (req, res) => res.send(await ItemModel.find().populate("category")))
+router.get('/', async (req, res) => res.send(await ItemModel.find()))//.populate("category")))
 
 router.get('/:id', async (req, res) => {
-    const entry = await ItemModel.findById(req.params.id).populate("category")
+    const entry = await ItemModel.findById(req.params.id)//.populate("category")
     if (entry) {
         res.send(entry)
     } else {
@@ -18,7 +18,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const insertedEntry = await (await ItemModel.create(req.body)).populate('category')
+        const insertedEntry = await (await ItemModel.create(req.body))//.populate('category')
         res.status(201).send(insertedEntry)
     }
     catch (err) {
