@@ -1,4 +1,4 @@
-import { ItemModel, closeConnection } from "./db.js"
+import { ItemModel, UserModel, closeConnection } from "./db.js"
 
 const items = [
     { 
@@ -79,5 +79,32 @@ await ItemModel.deleteMany()
 console.log('Deleted entries')
 await ItemModel.insertMany(items)
 console.log('Added entries')
+
+// Adding users to the database
+ const users = [
+    {
+        username: "nicolenightmare",
+        password: "imanartist",
+        email: "nicole@nightmare.com",
+        admin: true
+    },
+    {
+        username: "horsejorsington",
+        password: "mayorhorse",
+        email: "horse@jorsington.com",
+        admin: false
+    },
+    {
+        username: "nightmarefan03",
+        password: "ilovenicole",
+        email: "victor@vonhotdog.com",
+        admin: false
+    }
+ ]
+
+await UserModel.deleteMany()
+console.log('Deleted users')
+await UserModel.insertMany(users)
+console.log('Added users')
 
 closeConnection()

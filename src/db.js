@@ -3,6 +3,9 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+// const bcrypt = require('bcrypt')
+// const saltRounds = 12
+
 try {
     const m = await mongoose.connect(process.env.DB_URI)
     console.log(m.connection.readyState === 1 ? 'DB connected!' : 'DB failed to connect')
@@ -26,12 +29,17 @@ const itemSchema = new mongoose.Schema({
     featured: { type: Boolean, required: false }
 })
 
-const userSchema = new mongoose.Schema({
-    username: { type: String, required: true },
-    password: { type: String, required: true },
-    admin: { type: Boolean, required: false }
-})
-
 const ItemModel = mongoose.model("Item", itemSchema)
 
-export { closeConnection, ItemModel }
+// Establishing user schema 
+
+const userSchema = new mongoose.Schema({
+    username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
+    password: { type: String, required: true },
+    email: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
+    admin: {type: Boolean, required: true, default: false}
+})
+
+const UserModel = mongoose.model("User", userSchema)
+
+export { closeConnection, ItemModel, UserModel }

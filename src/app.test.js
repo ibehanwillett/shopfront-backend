@@ -18,7 +18,7 @@ describe("app test", () => {
         })
 
         test ('return JSON content', async () => {
-            expect(res.status).toBe(201)
+            expect(res.status).toBe(200)
             expect(res.header['content-type']).toContain('json')
         })
 
@@ -31,7 +31,7 @@ describe("app test", () => {
         })
 
         test ('array contains Nicole Nightmare', async () => {
-            expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ username: "Nicole Nightmare" })]))
+            expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ username: "nicolenightmare" })]))
         })
     })
 })
