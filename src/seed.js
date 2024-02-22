@@ -84,21 +84,24 @@ console.log('Added entries')
 // Adding users to the database
  const users = [
     {
-        username: "nicolenightmare",
-        password: "imanartist",
         email: "nicole@nightmare.com",
+        first: "Nicole",
+        last: "Nightmare",
+        password: "imanartist",
         admin: true
     },
     {
-        username: "horsejorsington",
-        password: "mayorhorse",
         email: "horse@jorsington.com",
+        first: "Horse",
+        last: "Jorsington",
+        password: "mayorhorse",
         admin: false
     },
     {
-        username: "nightmarefan03",
-        password: "ilovenicole",
         email: "victor@vonhotdog.com",
+        first: "Victor",
+        last: "Von Hot-Dog",
+        password: "ilovenicole",
         admin: false
     }
  ]
