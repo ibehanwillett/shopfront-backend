@@ -34,4 +34,31 @@ describe("app test", () => {
             expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ username: "nicolenightmare" })]))
         })
     })
-})
+
+    describe('POST /users/login' , () => {
+        let res
+
+        beforeAll(async () => {
+            res = await request(app).post('/users/login').send({
+                username: "nicolenightmare",
+                password: "imanartist"
+            })
+        })
+
+        test ('return JSON content', async () => {
+            expect(res.status).toBe(200)
+            expect(res.header['content-type']).toContain('json')
+        })
+
+        test ('return an object', async () => {
+            expect(res.body).toBeInstanceOf(Object)
+        })
+
+        test ('object contains a JWT', async () => {
+            expect(res.body).toMatchObject({
+                token: expect.any(String)
+                })
+            })
+        })
+
+    })
