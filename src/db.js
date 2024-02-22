@@ -26,6 +26,12 @@ const itemSchema = new mongoose.Schema({
     featured: { type: Boolean, required: false }
 })
 
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    admin: { type: Boolean, required: false }
+})
+
 const ItemModel = mongoose.model("Item", itemSchema)
 
 export { closeConnection, ItemModel }
