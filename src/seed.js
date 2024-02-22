@@ -1,4 +1,5 @@
 import { ItemModel, UserModel, closeConnection } from "./db.js"
+import bcrypt from "bcrypt"
 
 const items = [
     { 
@@ -101,6 +102,13 @@ console.log('Added entries')
         admin: false
     }
  ]
+
+ for (let i = 0; i < users.length; i++) {
+    let saltRounds = 12
+    let hashedPassword = await bcrypt.hash(users[i].password, saltRounds);
+    users[i].password = hashedPassword
+    console.log(users[i].password)
+}
 
 await UserModel.deleteMany()
 console.log('Deleted users')
