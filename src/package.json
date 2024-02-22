@@ -13,7 +13,7 @@
     "seed": "node seed.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Imogen Behan-Willett, Valentinas Kornijenka and Isaac Eveans Mellonie",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",

@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import jwt from 'jsonwebtoken'
 
 dotenv.config()
 
@@ -17,10 +16,7 @@ const closeConnection = () => {
     mongoose.disconnect()
 }
 
-//  Creating a JWT
-function generateAccessToken(username) {
-    return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '259200s' }) // expires in three days
-  }
+
 
 // Establishing item schema
 
