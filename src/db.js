@@ -1,10 +1,8 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
 
 dotenv.config()
-
-// const bcrypt = require('bcrypt')
-// const saltRounds = 12
 
 try {
     const m = await mongoose.connect(process.env.DB_URI)
@@ -18,6 +16,13 @@ const closeConnection = () => {
     console.log('Mongoose disconnecting ...')
     mongoose.disconnect()
 }
+
+//  Creating a JWT
+function generateAccessToken(username) {
+    return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '259200s' }) // expires in three days
+  }
+
+// Establishing item schema
 
 const itemSchema = new mongoose.Schema({
     category: { type: String, required: true },
