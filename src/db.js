@@ -35,9 +35,10 @@ const ItemModel = mongoose.model("Item", itemSchema)
 // Establishing user schema 
 
 const userSchema = new mongoose.Schema({
-    username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
+    email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
+    first: {type: String, lowercase: true,  required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
+    last: {type: String, lowercase: true,  required: [true, "can't be blank"], match: [/^[A-Za-z\-]+(?: [A-Za-z\-]+)?$/, 'is invalid'], index: true},
     password: { type: String, required: true },
-    email: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
     admin: {type: Boolean, required: true, default: false}
 })
 

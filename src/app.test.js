@@ -31,7 +31,7 @@ describe("app test", () => {
         })
 
         test ('array contains Nicole Nightmare', async () => {
-            expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ username: "nicolenightmare" })]))
+            expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ email: "nicole@nightmare.com" })]))
         })
     })
 
