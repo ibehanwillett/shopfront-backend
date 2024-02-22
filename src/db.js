@@ -16,6 +16,10 @@ const closeConnection = () => {
     mongoose.disconnect()
 }
 
+
+
+// Establishing item schema
+
 const itemSchema = new mongoose.Schema({
     category: { type: String, required: true },
     name: { type: String, required: true },
@@ -28,4 +32,15 @@ const itemSchema = new mongoose.Schema({
 
 const ItemModel = mongoose.model("Item", itemSchema)
 
-export { closeConnection, ItemModel }
+// Establishing user schema 
+
+const userSchema = new mongoose.Schema({
+    username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
+    password: { type: String, required: true },
+    email: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
+    admin: {type: Boolean, required: true, default: false}
+})
+
+const UserModel = mongoose.model("User", userSchema)
+
+export { closeConnection, ItemModel, UserModel }

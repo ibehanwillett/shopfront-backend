@@ -1,4 +1,5 @@
-import { ItemModel, closeConnection } from "./db.js"
+import { ItemModel, UserModel, closeConnection } from "./db.js"
+import bcrypt from "bcrypt"
 
 const items = [
     { 
@@ -79,5 +80,39 @@ await ItemModel.deleteMany()
 console.log('Deleted entries')
 await ItemModel.insertMany(items)
 console.log('Added entries')
+
+// Adding users to the database
+ const users = [
+    {
+        username: "nicolenightmare",
+        password: "imanartist",
+        email: "nicole@nightmare.com",
+        admin: true
+    },
+    {
+        username: "horsejorsington",
+        password: "mayorhorse",
+        email: "horse@jorsington.com",
+        admin: false
+    },
+    {
+        username: "nightmarefan03",
+        password: "ilovenicole",
+        email: "victor@vonhotdog.com",
+        admin: false
+    }
+ ]
+
+ for (let i = 0; i < users.length; i++) {
+    let saltRounds = 12
+    let hashedPassword = await bcrypt.hash(users[i].password, saltRounds);
+    users[i].password = hashedPassword
+    console.log(users[i].password)
+}
+
+await UserModel.deleteMany()
+console.log('Deleted users')
+await UserModel.insertMany(users)
+console.log('Added users')
 
 closeConnection()
