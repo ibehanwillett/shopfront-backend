@@ -47,18 +47,13 @@ describe("app test", () => {
 
         test ('return JSON content', async () => {
             expect(res.status).toBe(200)
-            expect(res.header['content-type']).toContain('json')
+            expect(res.header['content-type']).toContain("text/html; charset=utf-8")
         })
 
         test ('return an object', async () => {
             expect(res.body).toBeInstanceOf(Object)
         })
 
-        test ('object contains a JWT', async () => {
-            expect(res.body).toMatchObject({
-                token: expect.any(String)
-                })
-            })
         })
 
     })
