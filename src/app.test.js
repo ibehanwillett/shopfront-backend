@@ -9,4 +9,29 @@ describe("app test", () => {
         expect(res.body.info).toBeDefined()
         expect(res.body.info).toBe('Shopfront Backend')
     })
+
+    describe('GET /users' , () => {
+        let res 
+
+        beforeEach(async () => {
+            res = await request(app).get('/users')
+        })
+
+        test ('return JSON content', async () => {
+            expect(res.status).toBe(201)
+            expect(res.header['content-type']).toContain('json')
+        })
+
+        test ('return an array', async () => {
+            expect(res.body).toBeInstanceOf(Array)
+        })
+
+        test ('array has three elements', async () => {
+            expect(res.body).toHaveLength(3)
+        })
+
+        test ('array contains Nicole Nightmare', async () => {
+            expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ username: "Nicole Nightmare" })]))
+        })
+    })
 })
