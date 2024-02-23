@@ -10,6 +10,11 @@ const adminAccount = {
     password: "imanartist"
 }
 
+const normalAccount = {
+    email: "horse@jorsington.com",
+    password: "mayorhorse"
+}
+
 const authResponse = await request(app)
 .post('/user/login')
 .send(adminAccount)
@@ -69,6 +74,23 @@ describe("app test", () => {
             .expect(200)
 
         })
+
+    describe('unauthorised users cannot access authorised pages', () => {
+
+        let res
+
+        beforeAll(async () => {
+            res = await request(app).post('/users/login').send(normalAccount)
+        })
+
+        test ('unauthorized users are denied access meow', async () => {
+            const cookies = res.headers['set-cookie']
+            res = await request(app).get('/users/meow')
+            .set('Cookie', cookies)
+            .send()
+            .expect(401)
+        })
+    })
     })
 
     })

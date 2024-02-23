@@ -1,7 +1,7 @@
 import { UserModel } from "../db.js"
 import { Router } from "express"
 import bcrypt from 'bcrypt'
-import { generateAccessToken, authenticateToken } from "../controllers/auth.js"
+import { generateAccessToken, authenticateToken, authorize } from "../controllers/auth.js"
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
 })
 
 
-router.get("/meow", authenticateToken, (req, res) => {
+router.get("/meow", authorize, (req, res) => {
     res.status(200).json({success:"meow meow"})
 })
 
