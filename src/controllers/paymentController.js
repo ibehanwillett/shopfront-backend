@@ -1,11 +1,7 @@
 import { createPaymentIntent } from '../services/stripeService.js';
 
 export const processPayment = async (req, res) => {
-    const { paymentMethodId, amount } = req.body;
-  
-    if (!paymentMethodId || !amount) {
-      return res.status(400).json({ success: false, message: "Missing required parameters." });
-    }
+    const { paymentMethodId, amount } = req.body; 
   
     try {
       const paymentIntent = await createPaymentIntent(paymentMethodId, amount);
@@ -14,4 +10,4 @@ export const processPayment = async (req, res) => {
       console.error(error);
       res.status(500).json({ success: false, message: error.message });
     }
-  };
+};

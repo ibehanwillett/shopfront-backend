@@ -1,15 +1,20 @@
 import request from 'supertest';
 import { expect } from 'chai';
-import app from './../app.js'; 
+import app from './../app.js';
+import { generateAccessToken } from './../auth.js'; 
+
+const username = 'shopfront-valentinas';
+const validToken = generateAccessToken({ username }); 
 
 describe('POST /payment/process-payment', function() {
   it('should require paymentMethodId and amount', function(done) {
     request(app)
       .post('/payment/process-payment')
+      .set('Authorization', `Bearer ${validToken}`)
       .send({})
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body).to.deep.equal({ success: false, message: "Missing required parameters." });
+        expect(res.body).to.deep.equal({ message: "Missing required payment parameters." });
         done();
       });
   });
@@ -20,6 +25,7 @@ describe('POST /payment/process-payment', function() {
 
     request(app)
       .post('/payment/process-payment')
+      .set('Authorization', `Bearer ${validToken}`) 
       .send({ paymentMethodId, amount })
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
