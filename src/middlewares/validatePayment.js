@@ -1,7 +1,7 @@
 const validatePayment = (req, res, next) => {
     const { paymentMethodId, amount } = req.body;
   
-    if (!paymentMethodId || !amount) {
+    if (paymentMethodId === undefined || paymentMethodId === '' || amount === undefined || amount === '') {
       return res.status(400).json({ message: "Missing required payment parameters." });
     }
   
@@ -10,7 +10,7 @@ const validatePayment = (req, res, next) => {
     }
   
     next();
-  };
+};
   
   export default validatePayment;
   

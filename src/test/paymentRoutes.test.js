@@ -20,7 +20,7 @@ describe('POST /payment/process-payment', function() {
   });
 
   it('should process payment successfully', function(done) {
-    const paymentMethodId = 'pm_example';
+    const paymentMethodId = 'pm_card_visa';
     const amount = 1000; 
 
     request(app)
@@ -33,4 +33,35 @@ describe('POST /payment/process-payment', function() {
         done();
       });
   });
+
+  it('should reject payment with zero amount', function(done) {
+    const paymentMethodId = 'pm_card_visa';
+    const amount = 0; 
+    
+    request(app)
+      .post('/payment/process-payment')
+      .set('Authorization', `Bearer ${validToken}`)
+      .send({ paymentMethodId, amount })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400); 
+        expect(res.body).to.deep.equal({ message: "Invalid amount." }); 
+        done();
+      });
+  });
+
+  it('should reject payment with negative amount', function(done) {
+    const paymentMethodId = 'pm_card_visa';
+    const amount = -100;
+    
+    request(app)
+      .post('/payment/process-payment')
+      .set('Authorization', `Bearer ${validToken}`)
+      .send({ paymentMethodId, amount })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body).to.deep.equal({ message: "Invalid amount." }); 
+        done();
+      });
+  });
+
 });
