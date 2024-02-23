@@ -1,7 +1,10 @@
 import { UserModel } from "../db.js"
 import { Router } from "express"
 import bcrypt from 'bcrypt'
-import { generateAccessToken } from "../controllers/auth.js"
+import { generateAccessToken, authenticateToken } from "../controllers/auth.js"
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const router = Router()
 
@@ -16,16 +19,24 @@ router.post('/login', async (req, res) => {
             const passwordMatch = await bcrypt.compare(submittedPass, storedPass)
             if (passwordMatch) {
                 const token = generateAccessToken(dbUser.email)
-                res.cookie('jwt',token, { httpOnly: true, secure: true, maxAge: 3600000 })
-                res.status(200).send(token)
-            } else {
-                res.status(404).send("Invalid email or password")
+                res
+                .cookie("access_token", token, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                  })
+                  .status(200)
+                  .json({ message: "Logged in successfully" })
             }
         } else {
             res.status(404).send("Invalid email or password")
         }
     } catch (err) {
         res.status(400).send({error: err.message})}
+})
+
+
+router.get("/meow", authenticateToken, (req, res) => {
+    res.status(200).json({success:"meow meow"})
 })
 
 // Register New User

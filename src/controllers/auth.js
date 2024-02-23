@@ -1,28 +1,29 @@
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
-import { UserModel } from '../db'
+import { UserModel } from '../db.js'
 
 
 dotenv.config()
 
 //  Creating a JWT
-export function generateAccessToken(username) {
-    return jwt.sign(username, process.env.TOKEN_SECRET, {}) // currently doesn't expire
+export function generateAccessToken(email) {
+    return jwt.sign(email, process.env.TOKEN_SECRET, {}) // currently doesn't expire
   }
 
 // Authenticating a JWT
-const authenticateToken = async (req, res, next) => {
+export const authenticateToken = async (req, res, next) => {
   try {
-    const token = req.header('Authorization').replace('Bearer ', '')
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const user = await UserModel.findOne({email: decoded.email, 'tokens.token': token})
+    const token = req.cookies.access_token
+    console.log(token)
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
+    console.log(decoded)
+    const user = await UserModel.findOne({email: decoded})
 
     if (!user) {
         throw new Error()
     }
 
     req.token = token
-    req.user = user
     next()
 
 } catch (error) {
