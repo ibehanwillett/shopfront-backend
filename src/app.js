@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors' 
+import cookieParser from 'cookie-parser'
 import itemRoutes from './routes/item_routes.js'
 import userRoutes from './routes/user_routes.js'
 

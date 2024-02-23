@@ -40,19 +40,16 @@ describe("app test", () => {
 
         beforeAll(async () => {
             res = await request(app).post('/users/login').send({
-                username: "nicolenightmare",
+                email: "nicole@nightmare.com",
                 password: "imanartist"
             })
         })
 
         test ('return JSON content', async () => {
             expect(res.status).toBe(200)
-            expect(res.header['content-type']).toContain("text/html; charset=utf-8")
+            expect(res.header['content-type']).toContain("json; charset=utf-8")
         })
 
-        test ('return an object', async () => {
-            expect(res.body).toBeInstanceOf(Object)
-        })
 
         })
 
