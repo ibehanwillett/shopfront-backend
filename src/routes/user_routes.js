@@ -34,14 +34,40 @@ router.post('/login', async (req, res) => {
         res.status(400).send({error: err.message})}
 })
 
+// Log out
 
+
+// Register New User
+router.post('/', async (req, res) => {
+    try {
+        await UserModel.findOne({email: req.body.email})
+        if (user) {
+            return res.status(400).json({error: 'Email has already been registered'})
+        } else {
+            const newUser = new UserModel({
+                email: req.body.email,
+                password: req.body.password
+            })
+            let saltRounds = 12
+            hashedPassword = await bcrypt.hash(newUser.password, saltRounds)
+            newUser.password = hashedPassword
+            newUser.save()
+            return res.status(200).json({message: newUser})
+    }
+} catch (err) {
+    res.status(400).send({error: err.message})
+}
+    
+})
+
+// Delete User
+
+// test route
 router.get("/meow", authorize, (req, res) => {
     res.status(200).json({success:"meow meow"})
 })
 
-// Register New User
 
-// Delele User
 
 
 
