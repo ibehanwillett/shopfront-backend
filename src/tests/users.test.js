@@ -1,5 +1,24 @@
-import app from './app.js'
+import app from '../app.js'
 import request from 'supertest'
+// import superagent from 'superagent'
+
+const agent = request.agent(app)
+// const agent = superagent.agent(app)
+
+const adminAccount = {
+    email: "nicole@nightmare.com",
+    password: "imanartist"
+}
+
+const normalAccount = {
+    email: "horse@jorsington.com",
+    password: "mayorhorse"
+}
+
+const authResponse = await request(app)
+.post('/user/login')
+.send(adminAccount)
+
 
 describe("app test", () => {
     test('GET /', async () => {
@@ -39,21 +58,39 @@ describe("app test", () => {
         let res
 
         beforeAll(async () => {
-            res = await request(app).post('/users/login').send({
-                username: "nicolenightmare",
-                password: "imanartist"
-            })
+            res = await request(app).post('/users/login').send(adminAccount)
         })
 
         test ('return JSON content', async () => {
             expect(res.status).toBe(200)
-            expect(res.header['content-type']).toContain("text/html; charset=utf-8")
+            expect(res.header['content-type']).toContain("json; charset=utf-8")
         })
 
-        test ('return an object', async () => {
-            expect(res.body).toBeInstanceOf(Object)
-        })
+        test ('access authorized routes', async () => {
+            const cookies = res.headers['set-cookie']
+            res = await request(app).get('/users/meow')
+            .set('Cookie', cookies)
+            .send()
+            .expect(200)
 
         })
+
+    describe('unauthorised users cannot access authorised pages', () => {
+
+        let res
+
+        beforeAll(async () => {
+            res = await request(app).post('/users/login').send(normalAccount)
+        })
+
+        test ('unauthorized users are denied access meow', async () => {
+            const cookies = res.headers['set-cookie']
+            res = await request(app).get('/users/meow')
+            .set('Cookie', cookies)
+            .send()
+            .expect(401)
+        })
+    })
+    })
 
     })
