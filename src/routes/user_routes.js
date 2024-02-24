@@ -36,6 +36,12 @@ router.post('/login', async (req, res) => {
 })
 
 // Log out
+router.get("/logout", authenticateToken, (req, res) => {
+    return res
+      .clearCookie("access_token")
+      .status(200)
+      .json({ message: "Successfully logged out" });
+  })
 
 
 // Register New User
@@ -68,7 +74,7 @@ router.delete('/:id', async (req, res) => {
         if (!user) {
             return res.status(400).json({error: 'No account registered with this email address'})
         } else {
-            deleteUser= await UserModel.findByIdAndDelete({re.params.id})
+            deleteUser= await UserModel.findByIdAndDelete(req.params.id)
             if (deleteUser) {
                 res.sendStatus(204)
             } else {
