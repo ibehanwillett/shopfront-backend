@@ -137,4 +137,22 @@ describe("app test", () => {
 
     // })
 
+
+    describe('users can update their account', () => {
+
+        test('authorized users can update their account' , async () => {
+            let res = await request(app).post('/users/login').send(normalAccount)
+            const cookies = res.headers['set-cookie']
+            let updatedUser = await UserModel.findOne({email: normalAccount.email})
+            res = await request(app).patch(`/users/${updatedUser._id}`)
+            .set('Cookie', cookies)
+            .send({email: "horsethejor@mayor.com"})
+            .expect(201)
+        })
+        test ('array contains updated email', async () => {
+            let res = await request(app).get('/users')
+            expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ email: "horsethejor@mayor.com" })]))
+        })
     })
+
+})
