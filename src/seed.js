@@ -1,5 +1,6 @@
 import { ItemModel, closeConnection } from "./db.js"
 
+
 const items = [
     { 
         category: "Tees", 
@@ -7,7 +8,7 @@ const items = [
         price: 38.00, 
         description: "Fab Shirt",
         size: "M",
-        image: "Fab Shirt",
+        image: 'no-image.png',
         featured: true,
     },
     { 
@@ -17,23 +18,23 @@ const items = [
         description: "Cool Hat",
         size: "OS",
         image: "Cool Hat",
-        featured: true,
+        featured: false,
     },
     { 
         category: "Art", 
         name: "Unique Painting",
         price: 133.00, 
         description: "Unique Painting",
-        size: "60 x 40",
+        size: "n/a",
         image: "Unique Painting",
-        featured: true,
+        featured: false,
     },
     { 
         category: "Accessories", 
         name: "Cool Keyring",
         price: 12.00, 
         description: "Cool Keyring",
-        size: "",
+        size: "S",
         image: "Cool Keyring",
         featured: true,
     },
@@ -44,7 +45,7 @@ const items = [
         description: "Sparkly tee for sparkly times.",
         size: "XS",
         image: "Fab Shirt",
-        featured: true,
+        featured: false,
     },
     { 
         category: "Hats", 
@@ -53,14 +54,14 @@ const items = [
         description: "Nicole Nightmare signature art on this sweet hat.",
         size: "OS",
         image: "Logo Hat",
-        featured: true,
+        featured: false,
     },
     { 
         category: "Art", 
         name: "Unique Painting 2",
         price: 133.00, 
         description: "Unique Painting 2",
-        size: "60 x 40",
+        size: "n/a",
         image: "Unique Painting 2",
         featured: true,
     },
@@ -69,9 +70,9 @@ const items = [
         name: "Magic Keyring",
         price: 12.00, 
         description: "Magic Keyring",
-        size: "",
+        size: "n/a",
         image: "Magic Keyring",
-        featured: true,
+        featured: false,
     },
 ]
 
