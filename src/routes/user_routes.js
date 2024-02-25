@@ -90,6 +90,11 @@ router.get("/meow", authorizeAdmin, (req, res) => {
     res.status(200).json({success:"meow meow"})
 })
 
+// test route
+router.get("/bark/:id", authorize, (req, res) => {
+    res.status(200).json({success:"bark bark"})
+})
+
 
 
 

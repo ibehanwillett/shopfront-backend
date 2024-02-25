@@ -75,22 +75,40 @@ describe("app test", () => {
 
         })
 
-    describe('unauthorised users cannot access authorised pages', () => {
+    describe('users can log in, access authorised pages and log out', () => {
 
         let res
 
-        beforeAll(async () => {
+        beforeEach(async () => {
             res = await request(app).post('/users/login').send(normalAccount)
         })
 
-        test ('unauthorized users are denied access meow', async () => {
+        test ('non admin users are denied access to meow', async () => {
             const cookies = res.headers['set-cookie']
             res = await request(app).get('/users/meow')
             .set('Cookie', cookies)
             .send()
             .expect(401)
+        }) 
+
+        test('authorized users can access to pages' , async () => {
+            const cookies = res.headers['set-cookie']
+            res = await request(app).get('/users/bark/65d6ec9890bc6be386af2226')
+            .set('Cookie', cookies)
+            .send()
+            .expect(200)
+        })
+
+        test('authorized users can log out' , async () => {
+            const cookies = res.headers['set-cookie']
+            res = await request(app).get('/users/logout')
+            .set('Cookie', cookies)
+            .send()
+            .expect(200)
         })
     })
     })
+
+    // describe('a user can login and delete their account',)
 
     })
