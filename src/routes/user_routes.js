@@ -1,9 +1,8 @@
 import { UserModel } from "../db.js"
 import { Router } from "express"
 import bcrypt from 'bcrypt'
-import { generateAccessToken, authenticateToken, authorize } from "../controllers/auth.js"
+import { generateAccessToken, authenticateToken, authorizeAdmin, authorize } from "../controllers/auth.js"
 import dotenv from 'dotenv'
-import { deleteModel } from "mongoose"
 
 dotenv.config()
 
@@ -68,7 +67,7 @@ router.post('/', async (req, res) => {
 })
 
 // Delete User
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authorize, async (req, res) => {
     try {
         user = await UserModel.findOne({email: req.body.email})
         if (!user) {
@@ -87,7 +86,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 // test route
-router.get("/meow", authorize, (req, res) => {
+router.get("/meow", authorizeAdmin, (req, res) => {
     res.status(200).json({success:"meow meow"})
 })
 
