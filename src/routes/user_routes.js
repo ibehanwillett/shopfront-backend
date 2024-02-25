@@ -46,27 +46,22 @@ router.get("/logout", authenticateToken, (req, res) => {
 // Register New User
 router.post('/', async (req, res) => {
     try {
-        console.log("pissboy")
         let user = await UserModel.findOne({email: req.body.email})
         console.log(user)
         if (user) {
             return res.status(400).json({error: 'Email has already been registered'})
         } else {
-            console.log('pissgirl')
             let newUser = new UserModel({
                 email: req.body.email,
                 first: req.body.first,
                 last: req.body.last,
                 password: req.body.password
             })
-            console.log("piss")
             let saltRounds = 12
             let hashedPassword = await bcrypt.hash(newUser.password, saltRounds)
             newUser.password = hashedPassword
             newUser.save()
-            console.log("almost...")
             const token = generateAccessToken(newUser.email)
-            console.log(newUser)
             return res
                 .cookie("access_token", token, {
                     httpOnly: true,
@@ -78,6 +73,20 @@ router.post('/', async (req, res) => {
     res.status(400).send({error: err.message})
 }
     
+})
+
+// Update user 
+router.patch('/id', authorize, async (req, res) => {
+    try {
+        const updatedUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+            let saltRounds = 12
+            let hashedPassword = await bcrypt.hash(newUser.password, saltRounds)
+            updatedUser.password = hashedPassword
+            updatedUser.save()
+            return res.status(201).json(newUser)
+    } catch (err) {
+    res.status(400).send({error: err.message})
+}
 })
 
 // Delete User
