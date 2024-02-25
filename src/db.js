@@ -17,13 +17,13 @@ const closeConnection = () => {
 }
 
 const itemSchema = new mongoose.Schema({
-    category: { type: String, required: true },
-    name: { type: String, required: true },
-    price: { type: Number, required: true },
-    description: { type: String, required: true },
-    size: {type: String, required: false },
+    category: { type: String, required: true, default: "Other" },
+    name: { type: String, required: true, default: "Item Name" },
+    price: { type: Number, required: true, default: 0 },
+    description: { type: String, required: true, default: "Item Description" },
+    size: {type: String, required: true, default: "n/a"},
     image: { type: String, required: false },
-    featured: { type: Boolean, required: false }
+    featured: { type: Boolean, required: true, default: false }
 })
 
 const ItemModel = mongoose.model("Item", itemSchema)

@@ -15,9 +15,9 @@ const items = [
         category: "Hats", 
         name: "Cool Hat",
         price: 29.00, 
-        description: "Cool Hat",
+        description: "image.png",
         size: "OS",
-        image: "Cool Hat",
+        image: "image.png",
         featured: false,
     },
     { 
@@ -26,7 +26,7 @@ const items = [
         price: 133.00, 
         description: "Unique Painting",
         size: "n/a",
-        image: "Unique Painting",
+        image: "image.png",
         featured: false,
     },
     { 
@@ -35,7 +35,7 @@ const items = [
         price: 12.00, 
         description: "Cool Keyring",
         size: "S",
-        image: "Cool Keyring",
+        image: "image.png",
         featured: true,
     },
     { 
@@ -44,7 +44,7 @@ const items = [
         price: 38.00, 
         description: "Sparkly tee for sparkly times.",
         size: "XS",
-        image: "Fab Shirt",
+        image: "image.png",
         featured: false,
     },
     { 
@@ -53,7 +53,7 @@ const items = [
         price: 29.00, 
         description: "Nicole Nightmare signature art on this sweet hat.",
         size: "OS",
-        image: "Logo Hat",
+        image: "image.png",
         featured: false,
     },
     { 
@@ -62,7 +62,7 @@ const items = [
         price: 133.00, 
         description: "Unique Painting 2",
         size: "n/a",
-        image: "Unique Painting 2",
+        image: "image.png",
         featured: true,
     },
     { 
@@ -71,7 +71,7 @@ const items = [
         price: 12.00, 
         description: "Magic Keyring",
         size: "n/a",
-        image: "Magic Keyring",
+        image: "image.png",
         featured: false,
     },
 ]
