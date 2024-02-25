@@ -14,9 +14,7 @@ export function generateAccessToken(email) {
 export const authenticateToken = async (req, res, next) => {
   try {
     const token = req.cookies.access_token
-    console.log(token)
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
-    console.log(decoded)
     const user = await UserModel.findOne({email: decoded})
 
     if (!user) {
@@ -38,12 +36,9 @@ export const authorize = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
     const user = await UserModel.findOne({email: decoded})
     const dbUser = await UserModel.findOne({_id: req.params.id})
-    console.log(user.email)
-    console.log(dbUser.email)
     if (!user || (!user.admin && JSON.stringify(user) !== JSON.stringify(dbUser))) {
         throw new Error("Invalid user")
     }
-    console.log("piss!")
     req.token = token
     next()
 
@@ -56,9 +51,7 @@ export const authorize = async (req, res, next) => {
 export const authorizeAdmin = async (req, res, next) => {
   try {
     const token = req.cookies.access_token
-    console.log(token)
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
-    console.log(decoded)
     const user = await UserModel.findOne({email: decoded})
 
     if (!user || !user.admin) {

@@ -1,5 +1,6 @@
 import app from '../app.js'
 import request from 'supertest'
+import { UserModel } from '../db.js'
 // import superagent from 'superagent'
 
 const agent = request.agent(app)
@@ -13,6 +14,13 @@ const adminAccount = {
 const normalAccount = {
     email: "horse@jorsington.com",
     password: "mayorhorse"
+}
+
+const trialAccount = {
+    email: "foo@bar.com",
+    first: "foo",
+    last: "bar",
+    password: "spam"
 }
 
 const authResponse = await request(app)
@@ -109,6 +117,28 @@ describe("app test", () => {
     })
     })
 
-    // describe('a user can login and delete their account',)
+    describe('a user can create and delete their account', () => {
+
+        let res
+
+        test('a user can create their account', async () => {
+            res = await request(app).post('/users').send(trialAccount)
+            expect(res.status).toBe(201)
+            expect(res.body.email).toBeDefined()
+            expect(res.body.email).toBe('foo@bar.com')
+        })
+
+        // test('new user is in system', async () => {
+        //     res = await request(app).get('/users')
+        //      expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ email: "foo@bar.com" })]))
+        // })
+
+        afterAll(async () => {
+            res = await request(app).post('/users/login').send({email: "foo@bar.com", password: "spam"})
+            const cookies = res.headers['set-cookie']
+            request(app).delete(`/users/${res.body._id}`)
+        })
+
+    })
 
     })
