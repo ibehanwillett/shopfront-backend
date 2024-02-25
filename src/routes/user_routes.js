@@ -1,9 +1,8 @@
 import { UserModel } from "../db.js"
 import { Router } from "express"
 import bcrypt from 'bcrypt'
-import { generateAccessToken, authenticateToken, authorize } from "../controllers/auth.js"
+import { generateAccessToken, authenticateToken, authorizeAdmin, authorize } from "../controllers/auth.js"
 import dotenv from 'dotenv'
-import { deleteModel } from "mongoose"
 
 dotenv.config()
 
@@ -47,19 +46,28 @@ router.get("/logout", authenticateToken, (req, res) => {
 // Register New User
 router.post('/', async (req, res) => {
     try {
-        user = await UserModel.findOne({email: req.body.email})
+        let user = await UserModel.findOne({email: req.body.email})
+        console.log(user)
         if (user) {
             return res.status(400).json({error: 'Email has already been registered'})
         } else {
-            const newUser = new UserModel({
+            let newUser = new UserModel({
                 email: req.body.email,
+                first: req.body.first,
+                last: req.body.last,
                 password: req.body.password
             })
             let saltRounds = 12
-            hashedPassword = await bcrypt.hash(newUser.password, saltRounds)
+            let hashedPassword = await bcrypt.hash(newUser.password, saltRounds)
             newUser.password = hashedPassword
             newUser.save()
-            return res.status(200).json({message: newUser})
+            const token = generateAccessToken(newUser.email)
+            return res
+                .cookie("access_token", token, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                  })
+                  .status(201).json(newUser)
     }
 } catch (err) {
     res.status(400).send({error: err.message})
@@ -67,19 +75,29 @@ router.post('/', async (req, res) => {
     
 })
 
-// Delete User
-router.delete('/:id', async (req, res) => {
+// Update user 
+router.patch('/id', authorize, async (req, res) => {
     try {
-        user = await UserModel.findOne({email: req.body.email})
+        const updatedUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+            let saltRounds = 12
+            let hashedPassword = await bcrypt.hash(newUser.password, saltRounds)
+            updatedUser.password = hashedPassword
+            updatedUser.save()
+            return res.status(201).json(newUser)
+    } catch (err) {
+    res.status(400).send({error: err.message})
+}
+})
+
+// Delete User
+router.delete('/:id', authorize, async (req, res) => {
+    try {
+        let user = await UserModel.findOne({_id: req.params.id})
         if (!user) {
             return res.status(400).json({error: 'No account registered with this email address'})
         } else {
-            deleteUser= await UserModel.findByIdAndDelete(req.params.id)
-            if (deleteUser) {
-                res.sendStatus(204)
-            } else {
-                res.status(404).send({error: err.message})
-            }
+            await UserModel.findByIdAndDelete(req.params.id)
+            res.sendStatus(204)
         }
     } catch (err) {
         res.status(400).send({error: err.message})
@@ -87,8 +105,13 @@ router.delete('/:id', async (req, res) => {
 })
 
 // test route
-router.get("/meow", authorize, (req, res) => {
+router.get("/meow", authorizeAdmin, (req, res) => {
     res.status(200).json({success:"meow meow"})
+})
+
+// test route
+router.get("/bark/:id", authorize, (req, res) => {
+    res.status(200).json({success:"bark bark"})
 })
 
 

@@ -1,5 +1,6 @@
 import app from '../app.js'
 import request from 'supertest'
+import { UserModel } from '../db.js'
 // import superagent from 'superagent'
 
 const agent = request.agent(app)
@@ -13,6 +14,13 @@ const adminAccount = {
 const normalAccount = {
     email: "horse@jorsington.com",
     password: "mayorhorse"
+}
+
+const trialAccount = {
+    email: "foo@bar.com",
+    first: "foo",
+    last: "bar",
+    password: "spam"
 }
 
 const authResponse = await request(app)
@@ -75,22 +83,58 @@ describe("app test", () => {
 
         })
 
-    describe('unauthorised users cannot access authorised pages', () => {
+    describe('users can log in, access authorised pages and log out', () => {
 
         let res
 
-        beforeAll(async () => {
+        beforeEach(async () => {
             res = await request(app).post('/users/login').send(normalAccount)
         })
 
-        test ('unauthorized users are denied access meow', async () => {
+        test ('non admin users are denied access to meow', async () => {
             const cookies = res.headers['set-cookie']
             res = await request(app).get('/users/meow')
             .set('Cookie', cookies)
             .send()
             .expect(401)
+        }) 
+
+        test('authorized users can access to pages' , async () => {
+            const cookies = res.headers['set-cookie']
+            res = await request(app).get('/users/bark/65d6ec9890bc6be386af2226')
+            .set('Cookie', cookies)
+            .send()
+            .expect(200)
+        })
+
+        test('authorized users can log out' , async () => {
+            const cookies = res.headers['set-cookie']
+            res = await request(app).get('/users/logout')
+            .set('Cookie', cookies)
+            .send()
+            .expect(200)
         })
     })
     })
+
+    // describe('a user can create and delete their account', () => {
+
+    //     let res
+
+    //     test('a user can create their account', async () => {
+    //         res = await request(app).post('/users').send(trialAccount)
+    //         expect(res.status).toBe(201)
+    //         expect(res.body.email).toBeDefined()
+    //         expect(res.body.email).toBe('foo@bar.com')
+    //     })
+
+    //     afterAll(async () => {
+    //         let trialUser = await UserModel.findOne({email: "foo@bar.com"})
+    //         res = await request(app).post('/users/login').send({email: "foo@bar.com", password: "spam"})
+    //         const cookies = res.headers['set-cookie']
+    //         request(app).delete(`/users/${trialUser._id}`)
+    //     })
+
+    // })
 
     })
