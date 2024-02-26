@@ -1,3 +1,3 @@
 import app from './app.js'
 
-app.listen(4001)
+app.listen(process.env.PORT || 4001)
