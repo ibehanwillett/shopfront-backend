@@ -1,6 +1,7 @@
 import { ItemModel, UserModel, closeConnection } from "./db.js"
 import bcrypt from "bcrypt"
 
+
 const items = [
     { 
         category: "Tees", 
@@ -8,34 +9,34 @@ const items = [
         price: 38.00, 
         description: "Fab Shirt",
         size: "M",
-        image: "Fab Shirt",
+        image: 'https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8',
         featured: true,
     },
     { 
         category: "Hats", 
         name: "Cool Hat",
         price: 29.00, 
-        description: "Cool Hat",
+        description: "image.png",
         size: "OS",
-        image: "Cool Hat",
-        featured: true,
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
+        featured: false,
     },
     { 
         category: "Art", 
         name: "Unique Painting",
         price: 133.00, 
         description: "Unique Painting",
-        size: "60 x 40",
-        image: "Unique Painting",
-        featured: true,
+        size: "n/a",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
+        featured: false,
     },
     { 
         category: "Accessories", 
         name: "Cool Keyring",
         price: 12.00, 
         description: "Cool Keyring",
-        size: "",
-        image: "Cool Keyring",
+        size: "S",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: true,
     },
     { 
@@ -44,8 +45,8 @@ const items = [
         price: 38.00, 
         description: "Sparkly tee for sparkly times.",
         size: "XS",
-        image: "Fab Shirt",
-        featured: true,
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
+        featured: false,
     },
     { 
         category: "Hats", 
@@ -53,16 +54,16 @@ const items = [
         price: 29.00, 
         description: "Nicole Nightmare signature art on this sweet hat.",
         size: "OS",
-        image: "Logo Hat",
-        featured: true,
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
+        featured: false,
     },
     { 
         category: "Art", 
         name: "Unique Painting 2",
         price: 133.00, 
         description: "Unique Painting 2",
-        size: "60 x 40",
-        image: "Unique Painting 2",
+        size: "n/a",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: true,
     },
     { 
@@ -70,9 +71,9 @@ const items = [
         name: "Magic Keyring",
         price: 12.00, 
         description: "Magic Keyring",
-        size: "",
-        image: "Magic Keyring",
-        featured: true,
+        size: "n/a",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
+        featured: false,
     },
 ]
 
