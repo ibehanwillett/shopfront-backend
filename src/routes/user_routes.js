@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                   })
-                  .status(201).json({newUser})
+                  .status(201).send(newUser)
     }
 } catch (err) {
     res.status(400).send({error: err.message})
@@ -90,7 +90,7 @@ router.patch('/:id', authorize, async (req, res) => {
 // Delete User
 router.delete('/:id', authorize, async (req, res) => {
     try {
-        let user = await UserModel.findOne({_id: req.params.id})
+        let user = res.locals.activeUser
         if (!user) {
             return res.status(400).json({error: 'No account registered with this email address'})
         } else {

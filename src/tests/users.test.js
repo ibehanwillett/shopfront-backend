@@ -103,7 +103,6 @@ describe("app test", () => {
         test('authorized users can access to pages' , async () => {
             const cookies = res.headers['set-cookie']
             let jorsington = await UserModel.findOne({email: normalAccount.email})
-            console.log(jorsington)
             res = await request(app).get(`/users/bark/${jorsington._id}`)
             .set('Cookie', cookies)
             .send()
@@ -120,25 +119,27 @@ describe("app test", () => {
     })
     })
 
-    // describe('a user can create and delete their account', () => {
+    describe('a user can create and delete their account', () => {
 
-    //     let res
+        let res
 
-    //     test('a user can create their account', async () => {
-    //         res = await request(app).post('/users').send(trialAccount)
-    //         expect(res.status).toBe(201)
-    //         expect(res.body.email).toBeDefined()
-    //         expect(res.body.email).toBe('foo@bar.com')
-    //     })
+        test('a user can create their account', async () => {
+            res = await request(app).post('/users').send(trialAccount)
+            expect(res.status).toBe(201)
+            expect(res.body.email).toBeDefined()
+            expect(res.body.email).toEqual('foo@bar.com')
+        })
 
-    //     afterAll(async () => {
-    //         let trialUser = await UserModel.findOne({email: "foo@bar.com"})
-    //         res = await request(app).post('/users/login').send({email: "foo@bar.com", password: "spam"})
-    //         const cookies = res.headers['set-cookie']
-    //         request(app).delete(`/users/${trialUser._id}`)
-    //     })
+        afterAll(async () => {
+            let trialUser = await UserModel.findOne({email: "foo@bar.com"})
+            res = await request(app).post('/users/login').send({email: "foo@bar.com", password: "spam"})
+            const cookies = res.headers['set-cookie']
+            res = await request(app).delete(`/users/${trialUser._id}`)
+            .set('Cookie', cookies)
+            .expect(204)
+        })
 
-    // })
+    })
 
 
     describe('users can update their account', () => {
@@ -156,6 +157,20 @@ describe("app test", () => {
         test ('array contains updated email', async () => {
             let res = await request(app).get('/users')
             expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ email: "horsethejor@mayor.com" })]))
+        })
+            // Clean Up
+        afterAll(async () => {
+            let res = await request(app).post('/users/login').send({
+                email: "horsethejor@mayor.com",
+                password: "mayorhorse"
+            })
+            const cookies = res.headers['set-cookie']
+            let updatedUser = await UserModel.findOne({email: "horsethejor@mayor.com"})
+            res = await request(app).patch(`/users/${updatedUser._id}`)
+            .set('Cookie', cookies)
+            .send({email: normalAccount.email})
+            .expect(201)
+
         })
     })
 
