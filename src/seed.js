@@ -9,7 +9,7 @@ const items = [
         price: 38.00, 
         description: "Fab Shirt",
         size: "M",
-        image: 'no-image.png',
+        image: 'https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8',
         featured: true,
     },
     { 
@@ -18,7 +18,7 @@ const items = [
         price: 29.00, 
         description: "image.png",
         size: "OS",
-        image: "image.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: false,
     },
     { 
@@ -27,7 +27,7 @@ const items = [
         price: 133.00, 
         description: "Unique Painting",
         size: "n/a",
-        image: "image.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: false,
     },
     { 
@@ -36,7 +36,7 @@ const items = [
         price: 12.00, 
         description: "Cool Keyring",
         size: "S",
-        image: "image.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: true,
     },
     { 
@@ -45,7 +45,7 @@ const items = [
         price: 38.00, 
         description: "Sparkly tee for sparkly times.",
         size: "XS",
-        image: "image.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: false,
     },
     { 
@@ -54,7 +54,7 @@ const items = [
         price: 29.00, 
         description: "Nicole Nightmare signature art on this sweet hat.",
         size: "OS",
-        image: "image.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: false,
     },
     { 
@@ -63,7 +63,7 @@ const items = [
         price: 133.00, 
         description: "Unique Painting 2",
         size: "n/a",
-        image: "image.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: true,
     },
     { 
@@ -72,7 +72,7 @@ const items = [
         price: 12.00, 
         description: "Magic Keyring",
         size: "n/a",
-        image: "image.png",
+        image: "https://firebasestorage.googleapis.com/v0/b/shopfront-f3674.appspot.com/o/images%2Ftest-image.pngcf3a73f2-c244-4697-8b62-25ad8c43e6fb?alt=media&token=c301d69d-9f10-4514-89cd-06b2fa8a45b8",
         featured: false,
     },
 ]
