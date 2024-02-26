@@ -3,7 +3,7 @@ import request from 'supertest';
 import { ItemModel } from '../db'; // Make sure this path is correct
 
 const mockItem = {
-    _id: undefined,
+    // _id: undefined,
     category: 'Test Category',
     name: 'Test Item',
     description: 'This is a mock item used for testing.',
@@ -17,19 +17,65 @@ describe("Item Routes", () => {
 
     let createdItemId
 
-    test('POST /items should create a new item', async () => {
-        const response = await request(app)
-            .post('/items')
-            .send(mockItem)
-
-        expect(response.statusCode).toBe(201)
-        createdItemId = response.body._id
+    beforeEach(async () => {
+        const insertedItem = await ItemModel.create(mockItem)
+        createdItemId = insertedItem._id.toString()
     })
 
-    test('DELETE /items/:id should delete the mock item', async () => {
+    afterEach(async () => {
+        await ItemModel.findByIdAndDelete(createdItemId)
+    })
 
+    test('GET /items should return all items', async () => {
+        const res = await request(app).get('/items')
+        expect(res.statusCode).toBe(200)
+        expect(res.header['content-type']).toContain('application/json')
+        expect(res.body.length).toBeGreaterThan(0)
+    })
+
+    test('GET /items/:id should return an item by its id', async () => {
+        const response = await request(app).get(`/items/${createdItemId}`)
+        expect(response.statusCode).toBe(200)
+        expect(response.body.name).toBe(mockItem.name)
+    });
+
+    test('POST /items should create a new item', async () => {
+        const newItem = {
+            ...mockItem,
+            name: 'Unique Test Item Name'
+        };
+
+        const response = await request(app)
+            .post('/items')
+            .send(newItem)
+
+        expect(response.statusCode).toBe(201)
+        expect(response.body).toHaveProperty('_id')
+        createdItemId = response.body._id
+    });
+
+    test('PUT /items/:id should update the item', async () => {
         if (!createdItemId) {
-            throw new Error('Item ID not set. Make sure POST /items test runs successfully before this test.');
+            throw new Error('No item ID set. Make sure POST /items test runs successfully before this test.')
+        }
+
+        const updates = {
+            name: "Updated Name",
+            description: "This is an updated description.",
+        };
+
+        const res = await request(app)
+            .put(`/items/${createdItemId}`)
+            .send(updates);
+
+        expect(res.statusCode).toBe(200)
+        expect(res.body.name).toBe(updates.name)
+        expect(res.body.description).toBe(updates.description)
+    });
+
+    test('DELETE /items/:id should delete the mock item', async () => {
+        if (!createdItemId) {
+            throw new Error('Item ID not set. Make sure POST /items test runs successfully before this test.')
         }
 
         const deleteResponse = await request(app)
@@ -39,30 +85,6 @@ describe("Item Routes", () => {
 
         const fetchResponse = await request(app).get(`/items/${createdItemId}`)
         expect(fetchResponse.statusCode).toBe(404)
-    })
-
-    test('POST /items should create a new item', async () => {
-        const newItem = {
-            ...mockItem,
-            name: 'Unique Test Item Name'
-        }
-
-        const response = await request(app)
-            .post('/items')
-            .send(newItem)
-
-        expect(response.statusCode).toBe(201)
-        expect(response.body).toHaveProperty('_id')
-        
-        createdItemId = response.body._id
-    })
-
-    // test('PUT /items should update the item', async () => {
-    //     const updates = {
-    //         name: 'Updated Name',
-    //         category: 'Art',
-    //     }
-    // })
-
-})
+    });
+});
 
