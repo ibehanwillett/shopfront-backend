@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                   })
-                  .status(201).json(newUser)
+                  .status(201).json({newUser})
     }
 } catch (err) {
     res.status(400).send({error: err.message})
@@ -76,14 +76,16 @@ router.post('/', async (req, res) => {
 })
 
 // Update user 
-router.patch('/id', authorize, async (req, res) => {
+router.patch('/:id', authorize, async (req, res) => {
     try {
-        const updatedUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        const updatedUser = await UserModel.findByIdAndUpdate(res.locals.activeUser._id, req.body, {new: true})
+        if (req.body.password) {
             let saltRounds = 12
-            let hashedPassword = await bcrypt.hash(newUser.password, saltRounds)
+            let hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
             updatedUser.password = hashedPassword
+        }
             updatedUser.save()
-            return res.status(201).json(newUser)
+            return res.status(201).json(updatedUser)
     } catch (err) {
     res.status(400).send({error: err.message})
 }
