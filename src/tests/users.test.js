@@ -86,6 +86,7 @@ describe("app test", () => {
     describe('users can log in, access authorised pages and log out', () => {
 
         let res
+    
 
         beforeEach(async () => {
             res = await request(app).post('/users/login').send(normalAccount)
@@ -101,7 +102,9 @@ describe("app test", () => {
 
         test('authorized users can access to pages' , async () => {
             const cookies = res.headers['set-cookie']
-            res = await request(app).get('/users/bark/65d6ec9890bc6be386af2226')
+            let jorsington = await UserModel.findOne({email: normalAccount.email})
+            console.log(jorsington)
+            res = await request(app).get(`/users/bark/${jorsington._id}`)
             .set('Cookie', cookies)
             .send()
             .expect(200)
@@ -138,22 +141,22 @@ describe("app test", () => {
     // })
 
 
-    // describe('users can update their account', () => {
+    describe('users can update their account', () => {
 
-    //     test('authorized users can update their account' , async () => {
-    //         let res = await request(app).post('/users/login').send(normalAccount)
-    //         const cookies = res.headers['set-cookie']
-    //         let updatedUser = await UserModel.findOne({email: normalAccount.email})
-    //         console.log(updatedUser)
-    //         res = await request(app).patch(`/users/${updatedUser._id}`)
-    //         .set('Cookie', cookies)
-    //         .send({email: "horsethejor@mayor.com"})
-    //         .expect(201)
-    //     })
-    //     test ('array contains updated email', async () => {
-    //         let res = await request(app).get('/users')
-    //         expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ email: "horsethejor@mayor.com" })]))
-    //     })
-    // })
+        test('authorized users can update their account' , async () => {
+            let res = await request(app).post('/users/login').send(normalAccount)
+            const cookies = res.headers['set-cookie']
+            let updatedUser = await UserModel.findOne({email: normalAccount.email})
+            res = await request(app).patch(`/users/${updatedUser._id}`)
+            .set('Cookie', cookies)
+            .send({email: "horsethejor@mayor.com"})
+            .expect(201)
+        })
+
+        test ('array contains updated email', async () => {
+            let res = await request(app).get('/users')
+            expect(res.body).toEqual(expect.arrayContaining([expect.objectContaining({ email: "horsethejor@mayor.com" })]))
+        })
+    })
 
 })

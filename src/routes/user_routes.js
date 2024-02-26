@@ -35,11 +35,8 @@ router.post('/login', async (req, res) => {
 })
 
 // Log out
-router.get("/logout", authenticateToken, (req, res) => {
-    return res
-      .clearCookie("access_token")
-      .status(200)
-      .json({ message: "Successfully logged out" });
+router.get("/logout", authenticateToken, async (req, res) => {
+    return await res.clearCookie("access_token").status(200).json({message: "Successfully logged out!"});
   })
 
 
@@ -47,7 +44,6 @@ router.get("/logout", authenticateToken, (req, res) => {
 router.post('/', async (req, res) => {
     try {
         let user = await UserModel.findOne({email: req.body.email})
-        console.log(user)
         if (user) {
             return res.status(400).json({error: 'Email has already been registered'})
         } else {
