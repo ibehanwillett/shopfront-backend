@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { expect } from 'chai';
-import app from './../app.js';
-import { generateAccessToken } from './../auth.js'; 
+import app from '../app.js';
+import { generateAccessToken } from '../auth.js'; 
 
 const username = 'shopfront-valentinas';
 const validToken = generateAccessToken({ username }); 
