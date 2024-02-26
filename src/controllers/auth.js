@@ -16,11 +16,9 @@ export const authenticateToken = async (req, res, next) => {
     const token = req.cookies.access_token
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
     const user = await UserModel.findOne({email: decoded})
-
     if (!user) {
         throw new Error()
     }
-
     req.token = token
     next()
 
@@ -29,7 +27,7 @@ export const authenticateToken = async (req, res, next) => {
 }
 }
 
-// Authenticating a JWT
+// Authenticating a JWT with route parameters
 export const authorize = async (req, res, next) => {
   try {
     const token = req.cookies.access_token
@@ -40,6 +38,7 @@ export const authorize = async (req, res, next) => {
         throw new Error("Invalid user")
     }
     req.token = token
+    res.locals.activeUser = dbUser
     next()
 
 } catch (error) {

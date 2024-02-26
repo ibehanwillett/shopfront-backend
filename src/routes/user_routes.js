@@ -35,11 +35,8 @@ router.post('/login', async (req, res) => {
 })
 
 // Log out
-router.get("/logout", authenticateToken, (req, res) => {
-    return res
-      .clearCookie("access_token")
-      .status(200)
-      .json({ message: "Successfully logged out" });
+router.get("/logout", authenticateToken, async (req, res) => {
+    return await res.clearCookie("access_token").status(200).json({message: "Successfully logged out!"});
   })
 
 
@@ -47,7 +44,6 @@ router.get("/logout", authenticateToken, (req, res) => {
 router.post('/', async (req, res) => {
     try {
         let user = await UserModel.findOne({email: req.body.email})
-        console.log(user)
         if (user) {
             return res.status(400).json({error: 'Email has already been registered'})
         } else {
@@ -67,7 +63,7 @@ router.post('/', async (req, res) => {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                   })
-                  .status(201).json(newUser)
+                  .status(201).send(newUser)
     }
 } catch (err) {
     res.status(400).send({error: err.message})
@@ -76,14 +72,16 @@ router.post('/', async (req, res) => {
 })
 
 // Update user 
-router.patch('/id', authorize, async (req, res) => {
+router.patch('/:id', authorize, async (req, res) => {
     try {
-        const updatedUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        const updatedUser = await UserModel.findByIdAndUpdate(res.locals.activeUser._id, req.body, {new: true})
+        if (req.body.password) {
             let saltRounds = 12
-            let hashedPassword = await bcrypt.hash(newUser.password, saltRounds)
+            let hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
             updatedUser.password = hashedPassword
+        }
             updatedUser.save()
-            return res.status(201).json(newUser)
+            return res.status(201).json(updatedUser)
     } catch (err) {
     res.status(400).send({error: err.message})
 }
@@ -92,7 +90,7 @@ router.patch('/id', authorize, async (req, res) => {
 // Delete User
 router.delete('/:id', authorize, async (req, res) => {
     try {
-        let user = await UserModel.findOne({_id: req.params.id})
+        let user = res.locals.activeUser
         if (!user) {
             return res.status(400).json({error: 'No account registered with this email address'})
         } else {
