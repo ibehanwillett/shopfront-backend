@@ -101,7 +101,7 @@ router.delete('/:id', authorize, async (req, res) => {
             return res.status(400).json({error: 'No account registered with this email address'})
         } else {
             await UserModel.findByIdAndDelete(req.params.id)
-            res.sendStatus(204)
+            res.clearCookie("access_token").sendStatus(204)
         }
     } catch (err) {
         res.status(400).send({error: err.message})
