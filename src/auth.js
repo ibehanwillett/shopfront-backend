@@ -1,13 +1,13 @@
-import dotenv from 'dotenv'
-import jwt from 'jsonwebtoken'
+// import dotenv from 'dotenv'
+// import jwt from 'jsonwebtoken'
 
 
-dotenv.config()
+// dotenv.config()
 
 //  Creating a JWT
-export function generateAccessToken(username) {
-    return jwt.sign(username, process.env.TOKEN_SECRET, {}) // currently doesn't expire
-  }
+// export function generateAccessToken(username) {
+//     return jwt.sign(username, process.env.TOKEN_SECRET, {}) // currently doesn't expire
+//   }
 
 
 // const username = { username: "x" }; 
