@@ -11,7 +11,16 @@ dotenv.config();
 
 const app = express()
 // we need this import so that other ports can access the database
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173', //change to domain of deployed website post deployment
+    credentials: true,
+    allowedHeaders: [
+      "set-cookie",
+      "Content-Type",
+      "Access-Control-Allow-Origin",
+      "Access-Control-Allow-Credentials",
+    ]
+}))
 
 app.use(express.json())
 

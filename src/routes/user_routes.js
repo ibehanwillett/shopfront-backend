@@ -34,6 +34,17 @@ router.post('/login', async (req, res) => {
         res.status(400).send({error: err.message})}
 })
 
+router.get("/autoLogin", (req, res) => {
+    const cookie = req.headers.cookie;
+  
+    // if we received no cookies then user needs to login.
+    if (!cookie || cookie === null) {
+      return res.sendStatus(401);
+    }
+  
+    return res.sendStatus(200)
+})
+
 // Log out
 router.get("/logout", authenticateToken, async (req, res) => {
     return await res.clearCookie("access_token").status(200).json({message: "Successfully logged out!"});
@@ -61,6 +72,7 @@ router.post('/', async (req, res) => {
             return res
                 .cookie("access_token", token, {
                     httpOnly: true,
+                    maxAge: 24 * 60 * 60 * 1000, // 24 hours
                     secure: process.env.NODE_ENV === "production",
                   })
                   .status(201).send(newUser)
