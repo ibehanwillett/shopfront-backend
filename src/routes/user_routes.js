@@ -34,13 +34,7 @@ router.post('/login', async (req, res) => {
         res.status(400).send({error: err.message})}
 })
 
-router.get("/autoLogin", (req, res) => {
-    const cookie = req.headers.cookie;
-  
-    // if we received no cookies then user needs to login.
-    if (!cookie || cookie === null) {
-      return res.sendStatus(401);
-    }
+router.get("/autoLogin", authenticateToken, (req, res) => {
   
     return res.sendStatus(200)
 })
