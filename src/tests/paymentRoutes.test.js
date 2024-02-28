@@ -1,10 +1,9 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../app.js';
-import { generateAccessToken } from '../auth.js'; 
+import { generateAccessToken } from '../controllers/auth.js'; 
 
-const username = 'shopfront-valentinas';
-const validToken = generateAccessToken({ username }); 
+const validToken = generateAccessToken({ email: 'nicole@nightmare.com' }); 
 
 describe('POST /payment/process-payment', function() {
   it('should require paymentMethodId and amount', function(done) {
