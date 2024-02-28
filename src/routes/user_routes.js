@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
                     secure: process.env.NODE_ENV === "production",
                   })
                   .status(200)
-                  .json({ message: "Logged in successfully" })
+                  .send(dbUser)
             }
         } else {
             res.status(404).send("Invalid email or password")
@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
 
 router.get("/autoLogin", authenticateToken, (req, res) => {
   
-    return res.sendStatus(200)
+    return res.status(200).send(res.locals.activeUser)
 })
 
 // Log out
@@ -101,7 +101,7 @@ router.delete('/:id', authorize, async (req, res) => {
             return res.status(400).json({error: 'No account registered with this email address'})
         } else {
             await UserModel.findByIdAndDelete(req.params.id)
-            res.sendStatus(204)
+            res.clearCookie("access_token").sendStatus(204)
         }
     } catch (err) {
         res.status(400).send({error: err.message})

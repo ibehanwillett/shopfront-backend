@@ -20,6 +20,7 @@ export const authenticateToken = async (req, res, next) => {
         throw new Error()
     }
     req.token = token
+    res.locals.activeUser = user
     next()
 
 } catch (error) {
