@@ -42,7 +42,12 @@ router.get("/autoLogin", authenticateToken, (req, res) => {
 
 // Log out
 router.get("/logout", authenticateToken, async (req, res) => {
-    return await res.clearCookie("access_token").status(200).json({message: "Successfully logged out!"});
+    return await res.clearCookie("access_token", 
+    {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: 'none'
+      }).status(200).json({message: "Successfully logged out!"});
   })
 
 
