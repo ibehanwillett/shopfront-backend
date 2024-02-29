@@ -103,6 +103,7 @@ router.post('/', async (req, res) => {
                     httpOnly: true,
                     maxAge: 24 * 60 * 60 * 1000, // 24 hours
                     secure: process.env.NODE_ENV === "production",
+                    sameSite: 'none'
                 })
                 .status(201) // Respond with a 201 Created status code.
                 .send(newUser) // Send the newly created user object as the response.
@@ -152,7 +153,12 @@ router.delete('/:id', authorize, async (req, res) => {
             // If the user exists, proceed to delete the user account from the database by the provided ID.
             await UserModel.findByIdAndDelete(req.params.id)
             // After successfully deleting the user account, clear the session cookie ('access_token') to log out the user.
-            res.clearCookie("access_token").sendStatus(204) // 204 No Content status code indicates successful deletion with no content in the response body.
+            res.clearCookie("access_token",
+            {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: 'none'
+              }).sendStatus(204) // 204 No Content status code indicates successful deletion with no content in the response body.
         }
     } catch (err) {
          // If an error occurs during the process, catch it and send a 400 Bad Request response with the error message.
