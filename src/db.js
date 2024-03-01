@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
+// Config the .env file for use
 dotenv.config()
-
+ // Establishes a connection to the database
 try {
     const m = await mongoose.connect(process.env.DB_URI)
     console.log(m.connection.readyState === 1 ? 'DB connected!' : 'DB failed to connect')
@@ -11,6 +12,7 @@ catch (err) {
     console.error(err)
 }
 
+// Closes the connection to the database
 const closeConnection = () => {
     console.log('Mongoose disconnecting ...')
     mongoose.disconnect()
@@ -18,7 +20,7 @@ const closeConnection = () => {
 
 
 
-// Establishing item schema
+// Establishes item schema
 
 const itemSchema = new mongoose.Schema({
     category: { type: String, required: true, default: "Other" },
@@ -29,7 +31,7 @@ const itemSchema = new mongoose.Schema({
     image: { type: String, required: false },
     featured: { type: Boolean, required: true, default: false }
 })
-
+// Uses that schema to create a model for mongoose. This is how documents will be added to the MongoDB.
 const ItemModel = mongoose.model("Item", itemSchema)
 
 // Establishing user schema 
@@ -41,7 +43,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     admin: {type: Boolean, required: true, default: false}
 })
-
+// Uses that schema to create a user model for MongoDB
 const UserModel = mongoose.model("User", userSchema)
 
 export { closeConnection, ItemModel, UserModel }
