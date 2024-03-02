@@ -11,6 +11,8 @@ Team members: *Imogen Behan-Willett, Valentinas Kornijenka and Isaac Eveans Mell
 
 [Backend Repository](https://github.com/ibehanwillett/shopfront-backend)
 
+[Trello Board Link](https://trello.com/b/wBwq8aOc/t3a2-e-commerce-platform)
+
 # R12: 
 
 # R1
@@ -178,7 +180,11 @@ Screenshots as of the 16/02/24
 ![Trello board as of the 14/02/24](./docs/16.2_pt2.png)
 
 
-# R13
+# R13 A link and screenshots of your Trello board throughout the duration of the project. 
+
+
+[Trello Board Link](https://trello.com/b/wBwq8aOc/t3a2-e-commerce-platform)
+
 
 Screenshots as of the 20/02/24
 
