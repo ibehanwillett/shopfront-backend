@@ -1,5 +1,18 @@
 # Full Stack Application
 Team members: *Imogen Behan-Willett, Valentinas Kornijenka and Isaac Eveans Mellonie*
+
+# R10 
+
+[Deployed site URL](https://nicolenightmare.xyz/)
+
+# R11
+
+[Frontend Repository](https://github.com/ibehanwillett/shopfront-frontend)
+
+[Backend Repository](https://github.com/ibehanwillett/shopfront-backend)
+
+# R12: 
+
 # R1
 ---
 ### Description of website
@@ -103,6 +116,8 @@ After this iteration we went through the user stories and assigned a level of pr
 # R5
 
 ### Wireframes
+[Link to wireframes](https://www.figma.com/file/4uF1IZ9L19636HunD1y1ZW/E-Commerce-App?type=design&node-id=0-1&mode=design&t=VcPAqvdqVdBvmi28-0)
+
 We designed our wireframes using Figma. We kept the wireframes in monotone so that we had the option of easily making design changes later if needed. One of the key aspects of the site is that it is customised to suit the artist’s needs.
 
 Siteflow shows the relationships between the pages. The Home page acts as a base between all other pages, linking them from the hamburger menu (mobile/tablet) and menu (desktop). The main logo at the head of the page will also take the user to Home on click. 
@@ -161,3 +176,45 @@ Screenshots as of the 16/02/24
 
 ![Trello board as of the 14/02/24](./docs/16.2_pt1.png)
 ![Trello board as of the 14/02/24](./docs/16.2_pt2.png)
+
+
+# R13
+
+Screenshots as of the 20/02/24
+
+![Trello board as of the 20/02/24](./docs/20.2_pt1.png)
+![Trello board as of the 20/02/24](./docs/20.2_pt2.png)
+
+Screenshots as of the 21/02/24
+
+![Trello board as of the 21/02/24](./docs/21.2_pt1.png)
+![Trello board as of the 21/02/24](./docs/21.2_pt2.png)
+
+Screenshots as of the 22/02/24
+
+![Trello board as of the 22/02/24](./docs/22.2_pt1.png)
+![Trello board as of the 22/02/24](./docs/22.2_pt2.png)
+
+Screenshots as of the 25/02/24
+
+![Trello board as of the 25/02/24](./docs/25.2_pt1.png)
+![Trello board as of the 25/02/24](./docs/25.2_pt2.png)
+
+Screenshots as of the 26/02/24
+
+![Trello board as of the 26/02/24](./docs/26.2_pt1.png)
+![Trello board as of the 26/02/24](./docs/26.2_pt2.png)
+
+Screenshots as of the 27/02/24
+
+![Trello board as of the 27/02/24](./docs/27.2_pt1.png)
+
+Screenshots as of the 28/02/24
+
+![Trello board as of the 28/02/24](./docs/28.2_pt1.png)
+![Trello board as of the 28/02/24](./docs/28.2_pt2.png)
+
+Screenshots as of the 01/03/24
+
+![Trello board as of the 01/03/24](./docs/1.3_pt1.png)
+![Trello board as of the 01/03/24](./docs/1.3_pt2.png)
